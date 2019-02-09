@@ -2,9 +2,9 @@
   "name": "frontend_l4_chat_project_gudzii_ov",
   "version": "0.0.1",
   "description": "Hexlet chat project",
-  "main": "dist/public/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "hexlet": "dist/bin/hexlet.js"
+    "hexlet": "dist/bin/slack.js"
   },
   "engines": {
     "node": "9"
