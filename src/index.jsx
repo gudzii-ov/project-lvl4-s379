@@ -1,10 +1,15 @@
-import React from 'react';
-import { render } from 'react-dom';
-import gon from 'gon';
 import faker from 'faker';
 import cookies from 'js-cookie';
+import gon from 'gon';
 // import io from 'socket.io-client';
-import Chat from './chat';
+
+import React from 'react';
+import { render } from 'react-dom';
+// import { createStore } from 'redux';
+
+import Chat from './components/Chat';
+// import store from './store';
+// import reducers from './reducers';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
@@ -29,9 +34,11 @@ const getUser = () => {
 
 const username = getUser();
 
-const mountNode = document.getElementById('chat');
 const element = (
   <Chat state={gon} username={username} />
 );
 
-render(element, mountNode);
+render(
+  element,
+  document.getElementById('chat'),
+);
