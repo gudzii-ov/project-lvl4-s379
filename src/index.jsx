@@ -1,7 +1,7 @@
-import faker from 'faker';
-import cookies from 'js-cookie';
 import gon from 'gon';
 import { normalize, schema } from 'normalizr';
+import faker from 'faker';
+import cookies from 'js-cookie';
 // import io from 'socket.io-client';
 
 import React from 'react';
@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'; // TODO: replace Provider with decorator
 
 import Chat from './components/Chat';
 import reducers from './reducers';
+import UserContext from './user-context';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
@@ -55,7 +56,6 @@ const initialState = {
     allIds: normalizedGon.result.messages,
   },
   currentChannelId: normalizedGon.result.currentChannelId,
-  currentUser: username,
 };
 // End preparation
 
@@ -72,7 +72,9 @@ const store = createStore(
 
 const element = (
   <Provider store={store}>
-    <Chat />
+    <UserContext.Provider value={username}>
+      <Chat />
+    </UserContext.Provider>
   </Provider>
 );
 
