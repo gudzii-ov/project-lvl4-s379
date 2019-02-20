@@ -1,14 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Chat = ({ state: { channels }, username }) => (
+const mapStateToProps = state => state;
+
+const Chat = ({ channels, currentUser }) => (
   <div className="row h-100">
     <div className="col-3">
       <h3>Channels</h3>
       <ul className="list-group">
         {
-          channels.map(({ id, name }) => (
+          channels.allIds.map(id => (
             <li className="list-group-item" key={id}>
-              {name}
+              {channels.byId[id].name}
             </li>
           ))
         }
@@ -16,7 +19,7 @@ const Chat = ({ state: { channels }, username }) => (
     </div>
     <div className="col h-100">
       <h3>
-        {`Hello, ${username}`}
+        {`Hello, ${currentUser}`}
       </h3>
       <div className="w-100 p-2">
         <form>
@@ -37,4 +40,4 @@ const Chat = ({ state: { channels }, username }) => (
   </div>
 );
 
-export default Chat;
+export default connect(mapStateToProps)(Chat);
