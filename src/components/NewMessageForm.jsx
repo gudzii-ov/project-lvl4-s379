@@ -47,14 +47,17 @@ class NewMessageForm extends React.Component {
             name="text"
           />
           <div className="input-group-append">
-            <button className="input-group-text" id="basic-addon2" type="submit" disabled={pristine || submitting}>Send</button>
+            <button className="input-group-text btn btn-primary" id="basic-addon2" type="submit" disabled={pristine || submitting}>
+              {submitting ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" /> : 'Send'}
+            </button>
           </div>
         </div>
-        {error && <div className="ml-3">{error}</div>}
+        {error && <div className="alert alert-danger">{`Unable to send message: ${error}. Try again later.`}</div>}
       </form>
     );
   }
 }
+
 NewMessageForm.contextType = UserContext;
 
 const connectedNewMessageForm = connect(mapStateToProps, actionCreators)(NewMessageForm);
