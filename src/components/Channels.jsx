@@ -1,13 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state) => {
-  const props = {
-    ...state.channels,
-  };
-
-  return props;
-};
+const mapStateToProps = ({ channels }) => ({ ...channels });
 
 const Channels = ({ allIds, byId }) => (
   <React.Fragment>
