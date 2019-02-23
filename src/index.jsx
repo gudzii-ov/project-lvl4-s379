@@ -4,7 +4,7 @@ import { normalize, schema } from 'normalizr';
 import faker from 'faker';
 import cookies from 'js-cookie';
 import _ from 'lodash';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 import React from 'react';
 import { render } from 'react-dom';
