@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import gon from 'gon';
 import { normalize, schema } from 'normalizr';
 import faker from 'faker';
@@ -57,7 +58,7 @@ const initialState = {
   },
   currentChannelId: normalizedGon.result.currentChannelId,
 };
-// End preparation
+// End prepare
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
