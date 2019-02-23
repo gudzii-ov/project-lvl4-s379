@@ -29,7 +29,7 @@ const getUser = () => {
   const cookiename = cookies.get('username');
   if (cookiename === undefined) {
     username = faker.internet.userName();
-    cookies.set('username', username, { expires: 365 });
+    cookies.set('username', username, { expires: 1 });
   } else {
     username = cookiename;
   }
