@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 const mapStateToProps = (state) => {
   const props = {
-    newMessage: state.newMessage,
+    text: state.text,
   };
   return props;
 };
@@ -40,7 +40,7 @@ class NewMessageForm extends React.Component {
             aria-label="Message"
             aria-describedby="basic-addon2"
             component="input"
-            name="newMessage"
+            name="text"
           />
           <div className="input-group-append">
             <button className="input-group-text" id="basic-addon2" type="submit" disabled={pristine || submitting}>Send</button>
