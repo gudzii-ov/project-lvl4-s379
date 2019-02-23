@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import UserContext from '../user-context';
 
 const mapStateToProps = (state) => {
   const props = {
@@ -17,7 +18,8 @@ const actionCreators = {
 class NewMessageForm extends React.Component {
   handleSubmit = async (values) => {
     const { addMessageRequest, reset } = this.props;
-    const message = { ...values };
+    const userName = this.context;
+    const message = { ...values, user: userName };
     try {
       await addMessageRequest({ message });
     } catch (e) {
@@ -27,7 +29,9 @@ class NewMessageForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting, pristine } = this.props;
+    const {
+      handleSubmit, submitting, pristine, error,
+    } = this.props;
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="input-group mb-3">
@@ -46,10 +50,12 @@ class NewMessageForm extends React.Component {
             <button className="input-group-text" id="basic-addon2" type="submit" disabled={pristine || submitting}>Send</button>
           </div>
         </div>
+        {error && <div className="ml-3">{error}</div>}
       </form>
     );
   }
 }
+NewMessageForm.contextType = UserContext;
 
 const connectedNewMessageForm = connect(mapStateToProps, actionCreators)(NewMessageForm);
 export default reduxForm({
