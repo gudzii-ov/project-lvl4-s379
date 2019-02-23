@@ -3,6 +3,7 @@ import gon from 'gon';
 import { normalize, schema } from 'normalizr';
 import faker from 'faker';
 import cookies from 'js-cookie';
+import _ from 'lodash';
 // import io from 'socket.io-client';
 
 import React from 'react';
@@ -54,7 +55,7 @@ const initialState = {
   },
   messages: {
     byId: normalizedGon.entities.messages || {},
-    allIds: normalizedGon.result.messages,
+    allIds: _.reverse(normalizedGon.result.messages),
   },
   currentChannelId: normalizedGon.result.currentChannelId,
 };
