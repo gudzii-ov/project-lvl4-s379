@@ -28,8 +28,9 @@ class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);
     const { dispatch, socket } = this.props;
+    const { fetchMessageSuccess } = actions;
     socket.on('newMessage', (message) => {
-      dispatch(actions.fetchMessageSuccess(message));
+      dispatch(fetchMessageSuccess(message));
     });
   }
 
