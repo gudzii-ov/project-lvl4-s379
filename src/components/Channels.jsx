@@ -1,25 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
-const mapStateToProps = ({ channels }) => ({ ...channels });
+const mapStateToProps = ({ channels, currentChannelId }) => ({ ...channels, currentChannelId });
 
 @connect(mapStateToProps)
 class Channels extends React.Component {
   render() {
-    const { allIds, byId } = this.props;
+    const { allIds, byId, currentChannelId } = this.props;
     return (
       <React.Fragment>
         <h3>Channels</h3>
-        <ListGroup>
-          {
-             allIds.map(id => (
-               <ListGroup.Item key={id}>
-                 {byId[id].name}
-               </ListGroup.Item>
-             ))
-           }
-        </ListGroup>
+        {
+          allIds.map(id => (
+            <Button
+              key={id}
+              variant={id === currentChannelId ? 'success' : 'light'}
+              block
+            >
+              {byId[id].name}
+            </Button>
+          ))
+        }
       </React.Fragment>
     );
   }
