@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 
 import Chat from './components/Chat';
 import reducers from './reducers';
-import UserContext from './user-context';
+import { UserContext } from './user-context';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';

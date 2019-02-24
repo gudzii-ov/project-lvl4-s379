@@ -3,7 +3,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import * as actions from '../actions';
-import UserContext from '../user-context';
+import { withUser } from '../user-context';
 
 const mapStateToProps = (state) => {
   const props = {
@@ -18,6 +18,7 @@ const actionCreators = {
 };
 
 @connect(mapStateToProps, actionCreators)
+@withUser
 class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);
@@ -31,8 +32,11 @@ class NewMessageForm extends React.Component {
   }
 
   handleSubmit = async (values) => {
-    const { addMessageRequest, reset, channelId } = this.props;
-    const userName = this.context;
+    const {
+      addMessageRequest, reset, channelId, userName,
+    } = this.props;
+    // const userName = this.context;
+    // console.log(userName);
     const message = { ...values, user: userName };
     try {
       await addMessageRequest({ message, channelId });
@@ -71,7 +75,7 @@ class NewMessageForm extends React.Component {
   }
 }
 
-NewMessageForm.contextType = UserContext;
+// NewMessageForm.contextType = UserContext;
 
 export default reduxForm({
   form: 'newMessage',
