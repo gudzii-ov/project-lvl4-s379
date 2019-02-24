@@ -4,6 +4,7 @@ import { normalize, schema } from 'normalizr';
 import faker from 'faker';
 import cookies from 'js-cookie';
 import _ from 'lodash';
+import io from 'socket.io-client';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -13,7 +14,7 @@ import { Provider } from 'react-redux';
 
 import Chat from './components/Chat';
 import reducers from './reducers';
-import { UserContext } from './user-context';
+import { UserContext, SocketContext } from './context';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
@@ -37,6 +38,8 @@ const getUser = () => {
 };
 
 const username = getUser();
+
+const socket = io.connect('/');
 
 // Prepare initial state from gon data
 const message = new schema.Entity('messages');
@@ -73,9 +76,11 @@ const store = createStore(
 
 const element = (
   <Provider store={store}>
-    <UserContext.Provider value={username}>
-      <Chat />
-    </UserContext.Provider>
+    <SocketContext.Provider value={socket}>
+      <UserContext.Provider value={username}>
+        <Chat />
+      </UserContext.Provider>
+    </SocketContext.Provider>
   </Provider>
 );
 

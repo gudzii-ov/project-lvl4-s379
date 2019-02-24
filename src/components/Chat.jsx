@@ -6,7 +6,7 @@ import Channels from './Channels';
 import Messages from './Messages';
 import NewMessageForm from './NewMessageForm';
 
-import { withUser } from '../user-context';
+import { withUser } from '../context';
 
 @withUser
 class Chat extends React.Component {

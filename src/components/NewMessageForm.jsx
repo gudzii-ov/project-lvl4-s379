@@ -5,11 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
-import io from 'socket.io-client';
-
 
 import * as actions from '../actions';
-import { withUser } from '../user-context';
+import { withUser, withSocket } from '../context';
 
 const mapStateToProps = (state) => {
   const props = {
@@ -25,11 +23,11 @@ const actionCreators = {
 
 @connect(mapStateToProps, actionCreators)
 @withUser
+@withSocket
 class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);
-    const { dispatch } = this.props;
-    const socket = io.connect('/');
+    const { dispatch, socket } = this.props;
     dispatch(actions.fetchMessageSocket(socket));
   }
 
