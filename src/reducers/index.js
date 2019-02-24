@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
@@ -11,6 +12,13 @@ const channels = handleActions({
       allIds: [...allIds, channel.id],
     };
   },
+  [actions.removeChannel](state, { payload: { data: { id } } }) {
+    const { byId, allIds } = state;
+    return {
+      byId: _.omitBy(byId, channel => channel.id === id),
+      allIds: allIds.filter(cId => cId !== id),
+    };
+  },
 }, { byId: {}, allIds: [] });
 
 const messages = handleActions({
@@ -21,6 +29,15 @@ const messages = handleActions({
       allIds: [message.id, ...allIds],
     };
   },
+  [actions.removeMessages](state, { payload: { data: { id } } }) {
+    const { byId } = state;
+    const newById = _.omitBy(byId, message => message.channelId === id);
+    const newAllIds = _.reverse(_.keys(newById)).map(key => Number(key));
+    return {
+      byId: newById,
+      allIds: newAllIds,
+    };
+  },
 }, { byId: {}, allIds: [] });
 
 const currentChannelId = handleActions({
@@ -29,9 +46,23 @@ const currentChannelId = handleActions({
   },
 }, '');
 
+const channelForRemoval = handleActions({
+  [actions.setChannelForRemoval](state, { payload: id }) {
+    return { channelId: id };
+  },
+}, { channelId: '' });
+
+const modalUIState = handleActions({
+  [actions.toggleModalUIState](state) {
+    return { show: !state.show };
+  },
+}, { show: false });
+
 export default combineReducers({
   channels,
   messages,
   currentChannelId,
+  channelForRemoval,
+  modalUIState,
   form: formReducer,
 });

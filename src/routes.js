@@ -13,4 +13,5 @@ const prefix = '/api/v1';
 export default {
   messagesUrl: channelId => [prefix, 'channels', channelId, 'messages'].join('/'),
   channelsUrl: () => [prefix, 'channels'].join('/'),
+  channelRemoveUrl: channelId => [prefix, 'channels', channelId].join('/'),
 };
