@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 import { withSocket } from '../context';
 import { fetchChannelsSuccess, changeChannel } from '../actions';
@@ -29,12 +28,7 @@ class Channels extends React.Component {
     const { allIds, byId, currentChannelId } = this.props;
     return (
       <React.Fragment>
-        <ButtonToolbar className="justify-content-between">
-          <h3>Channels</h3>
-          <Button variant="secondary">
-              +
-          </Button>
-        </ButtonToolbar>
+        <h3>Channels</h3>
         <NewChannelForm />
         {
           allIds.map(id => (
