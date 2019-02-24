@@ -7,6 +7,7 @@ import UserContext from '../user-context';
 const mapStateToProps = (state) => {
   const props = {
     text: state.text,
+    channelId: state.currentChannelId,
   };
   return props;
 };
@@ -17,11 +18,11 @@ const actionCreators = {
 
 class NewMessageForm extends React.Component {
   handleSubmit = async (values) => {
-    const { addMessageRequest, reset } = this.props;
+    const { addMessageRequest, reset, channelId } = this.props;
     const userName = this.context;
     const message = { ...values, user: userName };
     try {
-      await addMessageRequest({ message });
+      await addMessageRequest({ message, channelId });
     } catch (e) {
       throw new SubmissionError({ _error: e.message });
     }
