@@ -17,6 +17,7 @@ const actionCreators = {
   addMessageRequest: actions.addMessageRequest,
 };
 
+@connect(mapStateToProps, actionCreators)
 class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);
@@ -72,7 +73,6 @@ class NewMessageForm extends React.Component {
 
 NewMessageForm.contextType = UserContext;
 
-const connectedNewMessageForm = connect(mapStateToProps, actionCreators)(NewMessageForm);
 export default reduxForm({
   form: 'newMessage',
-})(connectedNewMessageForm);
+})(NewMessageForm);

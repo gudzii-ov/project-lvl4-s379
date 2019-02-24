@@ -9,7 +9,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux'; // TODO: replace Provider with decorator
+import { Provider } from 'react-redux';
 
 import Chat from './components/Chat';
 import reducers from './reducers';
