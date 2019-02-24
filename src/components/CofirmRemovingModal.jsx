@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 import * as actions from '../actions';
 
-const mapStateToProps = ({ modalUIState, channelForRemoval, currentChannelId }) => ({ ...modalUIState, ...channelForRemoval, currentChannelId });
+const mapStateToProps = ({ modalUIState, channelForRemoval }) => ({ ...modalUIState, ...channelForRemoval });
 
 @connect(mapStateToProps)
 class ConfirmRemovingModal extends React.Component {
@@ -15,10 +15,7 @@ class ConfirmRemovingModal extends React.Component {
   }
 
   handleConfirm = () => {
-    const { dispatch, channelId, currentChannelId } = this.props;
-    if (channelId === currentChannelId) {
-      dispatch(actions.changeChannel(1));
-    }
+    const { dispatch, channelId } = this.props;
     dispatch(actions.removeChannelRequest({ channelId }));
     dispatch(actions.toggleModalUIState());
   }

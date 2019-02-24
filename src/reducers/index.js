@@ -44,6 +44,9 @@ const currentChannelId = handleActions({
   [actions.changeChannel](state, { payload: id }) {
     return id;
   },
+  [actions.removeChannel](state, { payload: { data: { id } } }) {
+    return state === id ? 1 : state;
+  },
 }, '');
 
 const channelForRemoval = handleActions({
