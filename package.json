@@ -73,7 +73,8 @@
     "socket.io-client": "^2.2.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "with-context": "0.0.3"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
