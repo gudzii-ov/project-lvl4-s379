@@ -1,4 +1,6 @@
 import React from 'react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import Channels from './Channels';
 import Messages from './Messages';
@@ -11,11 +13,11 @@ class Chat extends React.Component {
   render() {
     const { userName } = this.props;
     return (
-      <div className="row h-100">
-        <div className="col-3">
+      <Row>
+        <Col xs="3">
           <Channels />
-        </div>
-        <div className="col h-100">
+        </Col>
+        <Col>
           <h3>
             {`Hello, ${userName}`}
           </h3>
@@ -25,8 +27,8 @@ class Chat extends React.Component {
           <div className="p-2 h-100 mh-100 overflow-auto border border-info">
             <Messages />
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }

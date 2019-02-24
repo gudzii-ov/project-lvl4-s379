@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const mapStateToProps = ({ channels }) => ({ ...channels });
 
@@ -10,15 +11,15 @@ class Channels extends React.Component {
     return (
       <React.Fragment>
         <h3>Channels</h3>
-        <ul className="list-group">
+        <ListGroup>
           {
-         allIds.map(id => (
-           <li className="list-group-item" key={id}>
-             {byId[id].name}
-           </li>
-         ))
-       }
-        </ul>
+             allIds.map(id => (
+               <ListGroup.Item key={id}>
+                 {byId[id].name}
+               </ListGroup.Item>
+             ))
+           }
+        </ListGroup>
       </React.Fragment>
     );
   }
