@@ -11,3 +11,8 @@ export const addMessageRequest = ({ message, channelId }) => async () => {
 };
 
 export const changeChannel = createAction('CHANNEL_CHANGE');
+
+export const addChannelRequest = ({ channel }) => async () => {
+  const url = routes.channelsUrl();
+  await axios.post(url, { data: { attributes: { ...channel } } });
+};

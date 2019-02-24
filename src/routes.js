@@ -6,6 +6,11 @@ const prefix = '/api/v1';
 
 // Fetch messages - via web-sockets on event 'newMessage'
 
+// Add channel
+// POST '/channels'
+// { data: { attributes: { name } } }
+
 export default {
   messagesUrl: channelId => [prefix, 'channels', channelId, 'messages'].join('/'),
+  channelsUrl: () => [prefix, 'channels'].join('/'),
 };
