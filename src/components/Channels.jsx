@@ -18,7 +18,7 @@ class Channels extends React.Component {
     super(props);
     const { dispatch, socket } = this.props;
     socket.on('newChannel', (message) => {
-      dispatch(actions.fetchChannelsSuccess(message));
+      dispatch(actions.addChannel(message));
     });
     socket.on('removeChannel', (message) => {
       dispatch(actions.removeChannel(message));

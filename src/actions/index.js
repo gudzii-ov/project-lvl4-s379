@@ -2,8 +2,8 @@ import axios from 'axios';
 import { createAction } from 'redux-actions';
 import routes from '../routes';
 
-export const fetchMessageSuccess = createAction('MESSAGE_FETCH_SUCCESS');
-export const fetchChannelsSuccess = createAction('CHANNELS_FETCH_SUCCESS');
+export const addMessage = createAction('MESSAGE_FETCH_SUCCESS');
+export const addChannel = createAction('CHANNEL_ADD');
 
 export const addMessageRequest = ({ message, channelId }) => async () => {
   const url = routes.messagesUrl(channelId);
@@ -24,6 +24,8 @@ export const removeChannelRequest = ({ channelId }) => async () => {
 
 export const removeChannel = createAction('CHANNEL_REMOVE');
 export const removeMessages = createAction('MESSAGES_REMOVE');
+
+export const renameChannel = createAction('CHANNEL_RENAME');
 
 export const toggleModalUIState = createAction('MODAL_UI_STATE_TOGGLE');
 export const setChannelForRemoval = createAction('CHANNEL_FOR_REMOVAL_SET');

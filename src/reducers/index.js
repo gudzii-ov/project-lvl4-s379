@@ -5,7 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
 const channels = handleActions({
-  [actions.fetchChannelsSuccess](state, { payload: { data: { attributes: channel } } }) {
+  [actions.addChannel](state, { payload: { data: { attributes: channel } } }) {
     const { byId, allIds } = state;
     return {
       byId: { ...byId, [channel.id]: channel },
@@ -22,7 +22,7 @@ const channels = handleActions({
 }, { byId: {}, allIds: [] });
 
 const messages = handleActions({
-  [actions.fetchMessageSuccess](state, { payload: { data: { attributes: message } } }) {
+  [actions.addMessage](state, { payload: { data: { attributes: message } } }) {
     const { byId, allIds } = state;
     return {
       byId: { ...byId, [message.id]: message },
