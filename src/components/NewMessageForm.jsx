@@ -38,7 +38,6 @@ class NewMessageForm extends React.Component {
         <div className="input-group mb-3">
           <Field
             type="text"
-            required
             disabled={submitting}
             className="form-control"
             placeholder="message"

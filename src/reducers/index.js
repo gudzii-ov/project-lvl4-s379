@@ -4,7 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
 const messages = handleActions({
-  [actions.addMessageSuccess](state, { payload: { message } }) {
+  [actions.fetchMessageSuccess](state, { payload: { data: { attributes: message } } }) {
     const { byId, allIds } = state;
     return {
       byId: { ...byId, [message.id]: message },
@@ -14,6 +14,7 @@ const messages = handleActions({
 }, { byId: {}, allIds: [] });
 
 const channels = (state = {}) => state;
+// const messages = (state = {}) => state;
 const currentChannelId = (state = '') => state;
 
 export default combineReducers({

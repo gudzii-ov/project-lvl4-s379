@@ -4,7 +4,7 @@ import { normalize, schema } from 'normalizr';
 import faker from 'faker';
 import cookies from 'js-cookie';
 import _ from 'lodash';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -15,6 +15,7 @@ import { Provider } from 'react-redux'; // TODO: replace Provider with decorator
 import Chat from './components/Chat';
 import reducers from './reducers';
 import UserContext from './user-context';
+import { fetchMessageSocket } from './actions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
@@ -71,6 +72,9 @@ const store = createStore(
   ),
 );
 /* eslint-enable */
+
+const socket = io.connect('http://127.0.0.1:4000');
+store.dispatch(fetchMessageSocket(socket));
 
 const element = (
   <Provider store={store}>
