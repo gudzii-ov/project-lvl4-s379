@@ -11,7 +11,6 @@ import { withUser, withSocket } from '../context';
 
 const mapStateToProps = (state) => {
   const props = {
-    text: state.text,
     channelId: state.currentChannelId,
   };
   return props;
