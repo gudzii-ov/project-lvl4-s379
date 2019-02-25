@@ -11,20 +11,20 @@ const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...m
 class CommonModal extends React.Component {
   handleClose = () => {
     const { dispatch } = this.props;
-    dispatch(actions.toggleModalUIState());
+    dispatch(actions.toggleModalUIState({ wichModal: '' }));
   }
 
   handleConfirm = () => {
     const { dispatch, modalAction } = this.props;
     modalAction();
-    dispatch(actions.toggleModalUIState());
+    dispatch(actions.toggleModalUIState({ wichModal: '' }));
   }
 
   render() {
-    const { show, modalHeader, modalBody } = this.props;
+    const { wichModal, modalHeader, modalBody } = this.props;
 
     return (
-      <Modal show={show} onHide={this.handleClose}>
+      <Modal show={wichModal === 'common'} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalHeader}</Modal.Title>
         </Modal.Header>

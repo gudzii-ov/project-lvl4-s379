@@ -19,6 +19,15 @@ const channels = handleActions({
       allIds: allIds.filter(cId => cId !== id),
     };
   },
+  [actions.renameChannel](state, { payload: { data: { id, attributes: { name } } } }) {
+    const { byId, allIds } = state;
+    const channel = byId[id];
+    const newChannel = { ...channel, name };
+    return {
+      byId: { ...byId, [id]: newChannel },
+      allIds,
+    };
+  },
 }, { byId: {}, allIds: [] });
 
 const messages = handleActions({
@@ -56,10 +65,10 @@ const modalState = handleActions({
 }, {});
 
 const modalUIState = handleActions({
-  [actions.toggleModalUIState](state) {
-    return { show: !state.show };
+  [actions.toggleModalUIState](state, { payload: { wichModal } }) {
+    return { wichModal };
   },
-}, { show: false });
+}, { wichModal: '' });
 
 export default combineReducers({
   channels,
