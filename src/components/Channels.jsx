@@ -7,7 +7,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { withSocket } from '../context';
 import * as actions from '../actions';
 import NewChannelForm from './NewChannelForm';
-import ConfirmRemovingModal from './CofirmRemovingModal';
+// import ConfirmRemovingModal from './CofirmRemovingModal';
+import CommonModal from './CommonModal';
 
 const mapStateToProps = ({ channels, currentChannelId }) => ({ ...channels, currentChannelId });
 
@@ -32,9 +33,22 @@ class Channels extends React.Component {
 
   handleClickRemoval = id => () => {
     const { dispatch } = this.props;
+    const modalState = {
+      modalHeader: 'Remove channel',
+      modalBody: 'Are you want to removve channel?',
+      modalAction: () => {
+        dispatch(actions.removeChannelRequest({ channelId: id }));
+      },
+    };
+    dispatch(actions.setModal({ attributes: modalState }));
     dispatch(actions.toggleModalUIState());
-    dispatch(actions.setChannelForRemoval(id));
   }
+
+  // handleClickRemoval = id => () => {
+  //   const { dispatch } = this.props;
+  //   dispatch(actions.toggleModalUIState());
+  //   dispatch(actions.setChannelForRemoval(id));
+  // }
 
   render() {
     const { allIds, byId, currentChannelId } = this.props;
@@ -57,17 +71,21 @@ class Channels extends React.Component {
                 </Button>
                 {byId[id].removable
                   ? (
-                    <Button variant="info" onClick={this.handleClickRemoval(id)}>
-                      -
-                    </Button>
+                    <React.Fragment>
+                      <Button variant="dark" onClick={this.handleClickRemoval(id)}>
+                        Edit
+                      </Button>
+                      <Button variant="info" onClick={this.handleClickRemoval(id)}>
+                        -
+                      </Button>
+                    </React.Fragment>
                   ) : null
                 }
-
               </ButtonGroup>
             </ButtonToolbar>
           ))
         }
-        <ConfirmRemovingModal />
+        <CommonModal />
       </React.Fragment>
     );
   }

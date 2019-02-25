@@ -49,11 +49,11 @@ const currentChannelId = handleActions({
   },
 }, '');
 
-const channelForRemoval = handleActions({
-  [actions.setChannelForRemoval](state, { payload: id }) {
-    return { channelId: id };
+const modalState = handleActions({
+  [actions.setModal](state, { payload: { attributes } }) {
+    return { ...attributes };
   },
-}, { channelId: '' });
+}, {});
 
 const modalUIState = handleActions({
   [actions.toggleModalUIState](state) {
@@ -65,7 +65,7 @@ export default combineReducers({
   channels,
   messages,
   currentChannelId,
-  channelForRemoval,
+  modalState,
   modalUIState,
   form: formReducer,
 });

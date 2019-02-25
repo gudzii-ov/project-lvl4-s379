@@ -5,30 +5,30 @@ import Button from 'react-bootstrap/Button';
 
 import * as actions from '../actions';
 
-const mapStateToProps = ({ modalUIState, channelForRemoval }) => ({ ...modalUIState, ...channelForRemoval });
+const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...modalUIState });
 
 @connect(mapStateToProps)
-class ConfirmRemovingModal extends React.Component {
+class CommonModal extends React.Component {
   handleClose = () => {
     const { dispatch } = this.props;
     dispatch(actions.toggleModalUIState());
   }
 
   handleConfirm = () => {
-    const { dispatch, channelId } = this.props;
-    dispatch(actions.removeChannelRequest({ channelId }));
+    const { dispatch, modalAction } = this.props;
+    modalAction();
     dispatch(actions.toggleModalUIState());
   }
 
   render() {
-    const { show } = this.props;
+    const { show, modalHeader, modalBody } = this.props;
 
     return (
       <Modal show={show} onHide={this.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Channel removing</Modal.Title>
+          <Modal.Title>{modalHeader}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you really want to remove channel?</Modal.Body>
+        <Modal.Body>{modalBody}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.handleClose}>
               Cancel
@@ -42,4 +42,4 @@ class ConfirmRemovingModal extends React.Component {
   }
 }
 
-export default ConfirmRemovingModal;
+export default CommonModal;

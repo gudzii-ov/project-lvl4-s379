@@ -27,5 +27,6 @@ export const removeMessages = createAction('MESSAGES_REMOVE');
 
 export const renameChannel = createAction('CHANNEL_RENAME');
 
+export const setModal = createAction('MODAL_SET');
 export const toggleModalUIState = createAction('MODAL_UI_STATE_TOGGLE');
 export const setChannelForRemoval = createAction('CHANNEL_FOR_REMOVAL_SET');
