@@ -9,12 +9,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import * as actions from '../actions';
 import { withUser } from '../context';
 
-const mapStateToProps = (state) => {
-  const props = {
-    channelId: state.currentChannelId,
-  };
-  return props;
-};
+const mapStateToProps = state => ({ channelId: state.currentChannelId });
 
 const actionCreators = {
   addMessage: actions.addMessage,

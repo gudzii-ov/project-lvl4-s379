@@ -19,15 +19,14 @@ class Messages extends React.Component {
   render() {
     const { byId, allIds } = this.props;
     return (
-      allIds
-        .map((id) => {
-          const { user, text } = byId[id];
-          return (
-            <Alert variant="primary" key={id}>
-              {`${user} said: ${text}`}
-            </Alert>
-          );
-        })
+      allIds.map((id) => {
+        const { user, text } = byId[id];
+        return (
+          <Alert variant="primary" key={id}>
+            {`${user} said: ${text}`}
+          </Alert>
+        );
+      })
     );
   }
 }

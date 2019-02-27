@@ -11,7 +11,6 @@ import * as actions from '../actions';
 const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...modalUIState });
 
 const actionCreators = {
-  renameChannel: actions.renameChannel,
   toggleModal: actions.toggleModal,
 };
 

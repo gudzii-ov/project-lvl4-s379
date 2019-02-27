@@ -20,14 +20,36 @@ export const addChannel = ({ channel }) => async (dispatch) => {
 
 export const changeChannel = createAction('CHANNEL_CHANGE');
 
-export const removeChannel = ({ channelId }) => async () => {
-  const url = routes.channelActionUrl(channelId);
-  await axios.delete(url);
+export const removeChannelRequest = createAction('CHANNEL_REMOVE_REQUEST');
+export const removeChannelSuccess = createAction('CHANNEL_REMOVE_SUCCESS');
+export const removeChannelFailure = createAction('CHANNEL_REMOVE_FAILURE');
+
+export const removeChannel = ({ channelId }) => async (dispatch) => {
+  dispatch(removeChannelRequest());
+  try {
+    const url = routes.channelActionUrl(channelId);
+    await axios.delete(url);
+    dispatch(removeChannelSuccess());
+  } catch (e) {
+    dispatch(removeChannelFailure());
+    throw (e);
+  }
 };
 
-export const renameChannel = ({ channelId, name }) => async () => {
-  const url = routes.channelActionUrl(channelId);
-  await axios.patch(url, { data: { attributes: { name } } });
+export const renameChannelRequest = createAction('CHANNEL_RENAME_REQUEST');
+export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
+export const renameChannelFailure = createAction('CHANNEL_RENAME_FAILURE');
+
+export const renameChannel = ({ channelId, name }) => async (dispatch) => {
+  dispatch(renameChannelRequest());
+  try {
+    const url = routes.channelActionUrl(channelId);
+    await axios.patch(url, { data: { attributes: { name } } });
+    dispatch(renameChannelSuccess());
+  } catch (e) {
+    dispatch(renameChannelFailure());
+    throw (e);
+  }
 };
 
 export const addMessage = ({ message, channelId }) => async () => {
