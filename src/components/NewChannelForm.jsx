@@ -11,17 +11,17 @@ import * as actions from '../actions';
 const mapStateToProps = () => ({});
 
 const actionCreators = {
-  addChannelRequest: actions.addChannelRequest,
+  addChannel: actions.addChannel,
 };
 
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'newChannel' })
 class NewChannelForm extends React.Component {
   handleSubmit = async (values) => {
-    const { addChannelRequest, reset } = this.props;
+    const { addChannel, reset } = this.props;
     const channel = { ...values };
     try {
-      await addChannelRequest({ channel });
+      await addChannel({ channel });
     } catch (e) {
       throw new SubmissionError({ _error: e.message });
     }
