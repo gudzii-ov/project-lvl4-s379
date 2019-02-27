@@ -59,16 +59,16 @@ const currentChannelId = handleActions({
 }, '');
 
 const modalState = handleActions({
-  [actions.setModal](state, { payload: { attributes } }) {
+  [actions.toggleModal](state, { payload: { attributes } }) {
     return { ...attributes };
   },
 }, {});
 
 const modalUIState = handleActions({
-  [actions.toggleModalUIState](state, { payload: { wichModal } }) {
-    return { wichModal };
+  [actions.toggleModal](state, { payload: { modalType } }) {
+    return { modalType };
   },
-}, { wichModal: '' });
+}, { modalType: '' });
 
 export default combineReducers({
   channels,

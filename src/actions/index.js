@@ -20,12 +20,12 @@ export const addChannel = ({ channel }) => async (dispatch) => {
 
 export const changeChannel = createAction('CHANNEL_CHANGE');
 
-export const removeChannelRequest = ({ channelId }) => async () => {
+export const removeChannel = ({ channelId }) => async () => {
   const url = routes.channelActionUrl(channelId);
   await axios.delete(url);
 };
 
-export const renameChannelRequest = ({ channelId, name }) => async () => {
+export const renameChannel = ({ channelId, name }) => async () => {
   const url = routes.channelActionUrl(channelId);
   await axios.patch(url, { data: { attributes: { name } } });
 };
@@ -42,3 +42,4 @@ export const addMessageSocket = createAction('MESSAGE_FETCH_SUCCESS_SOCKET');
 
 export const setModal = createAction('MODAL_SET');
 export const toggleModalUIState = createAction('MODAL_UI_STATE_TOGGLE');
+export const toggleModal = (createAction('MODAL_TOGGLE'));

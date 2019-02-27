@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  addMessageRequest: actions.addMessageRequest,
+  addMessage: actions.addMessage,
 };
 
 @connect(mapStateToProps, actionCreators)
@@ -26,11 +26,11 @@ const actionCreators = {
 class NewMessageForm extends React.Component {
   handleSubmit = async (values) => {
     const {
-      addMessageRequest, reset, channelId, userName,
+      addMessage, reset, channelId, userName,
     } = this.props;
     const message = { ...values, user: userName };
     try {
-      await addMessageRequest({ message, channelId });
+      await addMessage({ message, channelId });
     } catch (e) {
       throw new SubmissionError({ _error: e.message });
     }

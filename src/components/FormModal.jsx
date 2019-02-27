@@ -11,20 +11,21 @@ import * as actions from '../actions';
 const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...modalUIState });
 
 const actionCreators = {
-  renameChannelRequest: actions.renameChannelRequest,
+  renameChannel: actions.renameChannel,
+  toggleModal: actions.toggleModal,
 };
 
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'modalForm' })
 class CommonModal extends React.Component {
   handleClose = () => {
-    const { dispatch } = this.props;
-    dispatch(actions.toggleModalUIState({ wichModal: '' }));
+    const { toggleModal } = this.props;
+    toggleModal({ modalType: '' });
   }
 
   handleSubmit = async (values) => {
     const {
-      dispatch, reset, modalAction,
+      reset, modalAction, toggleModal,
     } = this.props;
     try {
       await modalAction(values);
@@ -32,16 +33,16 @@ class CommonModal extends React.Component {
       throw new SubmissionError({ _error: e.message });
     }
     reset();
-    dispatch(actions.toggleModalUIState({ wichModal: '' }));
+    toggleModal({ modalType: '' });
   }
 
   render() {
     const {
-      handleSubmit, submitting, pristine, error, wichModal, modalHeader,
+      handleSubmit, submitting, pristine, error, modalType, modalHeader,
     } = this.props;
 
     return (
-      <Modal show={wichModal === 'form'} onHide={this.handleClose}>
+      <Modal show={modalType === 'form'} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalHeader}</Modal.Title>
         </Modal.Header>

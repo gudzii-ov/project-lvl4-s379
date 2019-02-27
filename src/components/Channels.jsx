@@ -11,36 +11,41 @@ import FormModal from './FormModal';
 
 const mapStateToProps = ({ channels, currentChannelId }) => ({ ...channels, currentChannelId });
 
-@connect(mapStateToProps)
+const actionCreators = {
+  changeChannel: actions.changeChannel,
+  removeChannel: actions.removeChannel,
+  renameChannel: actions.renameChannel,
+  toggleModal: actions.toggleModal,
+};
+
+@connect(mapStateToProps, actionCreators)
 class Channels extends React.Component {
   handleClickChannel = id => () => {
-    const { dispatch } = this.props;
-    dispatch(actions.changeChannel(id));
+    const { changeChannel } = this.props;
+    changeChannel(id);
   }
 
   handleClickRemoval = channelId => () => {
-    const { dispatch } = this.props;
+    const { removeChannel, toggleModal } = this.props;
     const modalState = {
       modalHeader: 'Remove channel',
       modalBody: 'Are you want to remove channel?',
       modalAction: () => {
-        dispatch(actions.removeChannelRequest({ channelId }));
+        removeChannel({ channelId });
       },
     };
-    dispatch(actions.setModal({ attributes: modalState }));
-    dispatch(actions.toggleModalUIState({ wichModal: 'common' }));
+    toggleModal({ attributes: modalState, modalType: 'common' });
   }
 
   handleClickEdit = channelId => () => {
-    const { dispatch } = this.props;
+    const { renameChannel, toggleModal } = this.props;
     const modalState = {
       modalHeader: 'Rename channel',
       modalAction: ({ name }) => {
-        dispatch(actions.renameChannelRequest({ name, channelId }));
+        renameChannel({ name, channelId });
       },
     };
-    dispatch(actions.setModal({ attributes: modalState }));
-    dispatch(actions.toggleModalUIState({ wichModal: 'form' }));
+    toggleModal({ attributes: modalState, modalType: 'form' });
   }
 
   render() {

@@ -7,24 +7,28 @@ import * as actions from '../actions';
 
 const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...modalUIState });
 
-@connect(mapStateToProps)
+const actionCreators = {
+  toggleModal: actions.toggleModal,
+};
+
+@connect(mapStateToProps, actionCreators)
 class CommonModal extends React.Component {
   handleClose = () => {
-    const { dispatch } = this.props;
-    dispatch(actions.toggleModalUIState({ wichModal: '' }));
+    const { toggleModal } = this.props;
+    toggleModal({ modalType: '' });
   }
 
   handleConfirm = () => {
-    const { dispatch, modalAction } = this.props;
+    const { toggleModal, modalAction } = this.props;
     modalAction();
-    dispatch(actions.toggleModalUIState({ wichModal: '' }));
+    toggleModal({ modalType: '' });
   }
 
   render() {
-    const { wichModal, modalHeader, modalBody } = this.props;
+    const { modalType, modalHeader, modalBody } = this.props;
 
     return (
-      <Modal show={wichModal === 'common'} onHide={this.handleClose}>
+      <Modal show={modalType === 'common'} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalHeader}</Modal.Title>
         </Modal.Header>
