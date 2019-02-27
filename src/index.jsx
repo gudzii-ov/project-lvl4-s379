@@ -14,7 +14,8 @@ import { Provider } from 'react-redux';
 
 import Chat from './components/Chat';
 import reducers from './reducers';
-import { UserContext, SocketContext } from './context';
+import { UserContext } from './context';
+import * as actions from './actions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
@@ -38,8 +39,6 @@ const getUser = () => {
 };
 
 const username = getUser();
-
-const socket = io.connect('/');
 
 // Prepare initial state from gon data
 const message = new schema.Entity('messages');
@@ -74,13 +73,26 @@ const store = createStore(
 );
 /* eslint-enable */
 
+const socket = io.connect('/');
+socket.on('newChannel', (response) => {
+  store.dispatch(actions.addChannel(response));
+});
+socket.on('removeChannel', (response) => {
+  store.dispatch(actions.removeChannel(response));
+  store.dispatch(actions.removeMessages(response));
+});
+socket.on('renameChannel', (response) => {
+  store.dispatch(actions.renameChannel(response));
+});
+socket.on('newMessage', (response) => {
+  store.dispatch(actions.addMessage(response));
+});
+
 const element = (
   <Provider store={store}>
-    <SocketContext.Provider value={socket}>
-      <UserContext.Provider value={username}>
-        <Chat />
-      </UserContext.Provider>
-    </SocketContext.Provider>
+    <UserContext.Provider value={username}>
+      <Chat />
+    </UserContext.Provider>
   </Provider>
 );
 

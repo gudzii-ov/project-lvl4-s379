@@ -19,6 +19,7 @@ export const changeChannel = createAction('CHANNEL_CHANGE');
 
 export const removeChannel = createAction('CHANNEL_REMOVE');
 export const removeMessages = createAction('MESSAGES_REMOVE');
+
 export const removeChannelRequest = ({ channelId }) => async () => {
   const url = routes.channelActionUrl(channelId);
   await axios.delete(url);

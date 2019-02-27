@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
-import { withSocket } from '../context';
 import * as actions from '../actions';
 import NewChannelForm from './NewChannelForm';
 import CommonModal from './CommonModal';
@@ -13,22 +12,7 @@ import FormModal from './FormModal';
 const mapStateToProps = ({ channels, currentChannelId }) => ({ ...channels, currentChannelId });
 
 @connect(mapStateToProps)
-@withSocket
 class Channels extends React.Component {
-  constructor(props) {
-    super(props);
-    const { dispatch, socket } = this.props;
-    socket.on('newChannel', (message) => {
-      dispatch(actions.addChannel(message));
-    });
-    socket.on('removeChannel', (message) => {
-      dispatch(actions.removeChannel(message));
-    });
-    socket.on('renameChannel', (message) => {
-      dispatch(actions.renameChannel(message));
-    });
-  }
-
   handleClickChannel = id => () => {
     const { dispatch } = this.props;
     dispatch(actions.changeChannel(id));

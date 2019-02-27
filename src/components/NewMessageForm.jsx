@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 import * as actions from '../actions';
-import { withUser, withSocket } from '../context';
+import { withUser } from '../context';
 
 const mapStateToProps = (state) => {
   const props = {
@@ -23,17 +23,7 @@ const actionCreators = {
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'newMessage' })
 @withUser
-@withSocket
 class NewMessageForm extends React.Component {
-  constructor(props) {
-    super(props);
-    const { dispatch, socket } = this.props;
-    const { addMessage } = actions;
-    socket.on('newMessage', (message) => {
-      dispatch(addMessage(message));
-    });
-  }
-
   handleSubmit = async (values) => {
     const {
       addMessageRequest, reset, channelId, userName,
