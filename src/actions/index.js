@@ -14,7 +14,7 @@ export const addChannel = ({ channel }) => async (dispatch) => {
     dispatch(addChannelSuccess());
   } catch (e) {
     dispatch(addChannelFailure());
-    throw (e);
+    throw e;
   }
 };
 
@@ -32,7 +32,7 @@ export const removeChannel = ({ channelId }) => async (dispatch) => {
     dispatch(removeChannelSuccess());
   } catch (e) {
     dispatch(removeChannelFailure());
-    throw (e);
+    throw e;
   }
 };
 
@@ -48,7 +48,7 @@ export const renameChannel = ({ channelId, name }) => async (dispatch) => {
     dispatch(renameChannelSuccess());
   } catch (e) {
     dispatch(renameChannelFailure());
-    throw (e);
+    throw e;
   }
 };
 
@@ -56,9 +56,16 @@ export const addMessageRequest = createAction('MESSAGE_ADD_REQUEST');
 export const addMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
 export const addMessageFailure = createAction('MESSAGE_ADD_FAILURE');
 
-export const addMessage = ({ message, channelId }) => async () => {
-  const url = routes.messagesUrl(channelId);
-  await axios.post(url, { data: { attributes: { ...message } } });
+export const addMessage = ({ message, channelId }) => async (dispatch) => {
+  dispatch(addMessageRequest());
+  try {
+    const url = routes.messagesUrl(channelId);
+    await axios.post(url, { data: { attributes: { ...message } } });
+    dispatch(addMessageSuccess());
+  } catch (e) {
+    dispatch(addMessageFailure());
+    throw e;
+  }
 };
 
 export const addChannelSocket = createAction('CHANNEL_ADD_SOCKET');
