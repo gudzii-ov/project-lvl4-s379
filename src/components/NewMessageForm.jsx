@@ -21,6 +21,7 @@ const actionCreators = {
 };
 
 @connect(mapStateToProps, actionCreators)
+@reduxForm({ form: 'newMessage' })
 @withUser
 @withSocket
 class NewMessageForm extends React.Component {
@@ -76,6 +77,4 @@ class NewMessageForm extends React.Component {
   }
 }
 
-export default reduxForm({
-  form: 'newMessage',
-})(NewMessageForm);
+export default NewMessageForm;

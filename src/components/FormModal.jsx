@@ -15,6 +15,7 @@ const actionCreators = {
 };
 
 @connect(mapStateToProps, actionCreators)
+@reduxForm({ form: 'modalForm' })
 class CommonModal extends React.Component {
   handleClose = () => {
     const { dispatch } = this.props;
@@ -73,6 +74,4 @@ class CommonModal extends React.Component {
   }
 }
 
-export default reduxForm({
-  form: 'modalForm',
-})(CommonModal);
+export default CommonModal;

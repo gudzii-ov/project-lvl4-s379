@@ -15,6 +15,7 @@ const actionCreators = {
 };
 
 @connect(mapStateToProps, actionCreators)
+@reduxForm({ form: 'newChannel' })
 class NewChannelForm extends React.Component {
   handleSubmit = async (values) => {
     const { addChannelRequest, reset } = this.props;
@@ -58,6 +59,4 @@ class NewChannelForm extends React.Component {
   }
 }
 
-export default reduxForm({
-  form: 'newChannel',
-})(NewChannelForm);
+export default NewChannelForm;
