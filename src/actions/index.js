@@ -52,6 +52,10 @@ export const renameChannel = ({ channelId, name }) => async (dispatch) => {
   }
 };
 
+export const addMessageRequest = createAction('MESSAGE_ADD_REQUEST');
+export const addMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
+export const addMessageFailure = createAction('MESSAGE_ADD_FAILURE');
+
 export const addMessage = ({ message, channelId }) => async () => {
   const url = routes.messagesUrl(channelId);
   await axios.post(url, { data: { attributes: { ...message } } });

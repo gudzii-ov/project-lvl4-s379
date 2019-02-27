@@ -4,6 +4,54 @@ import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
+const addChannelState = handleActions({
+  [actions.addChannelRequest]() {
+    return 'requested';
+  },
+  [actions.addChannelSuccess]() {
+    return 'finished';
+  },
+  [actions.addChannelFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
+const renameChannelState = handleActions({
+  [actions.renameChannelRequest]() {
+    return 'requested';
+  },
+  [actions.renameChannelSuccess]() {
+    return 'finished';
+  },
+  [actions.renameChannelFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
+const removeChannelState = handleActions({
+  [actions.removeChannelRequest]() {
+    return 'requested';
+  },
+  [actions.removeChannelSuccess]() {
+    return 'finished';
+  },
+  [actions.removeChannelFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
+const addMessageState = handleActions({
+  [actions.addMessageRequest]() {
+    return 'requested';
+  },
+  [actions.addMessageSuccess]() {
+    return 'finished';
+  },
+  [actions.addMessageFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
 const channels = handleActions({
   [actions.addChannelSocket](state, { payload: { data: { attributes: channel } } }) {
     const { byId, allIds } = state;
@@ -73,7 +121,11 @@ const modalUIState = handleActions({
 export default combineReducers({
   channels,
   messages,
+  addChannelState,
+  renameChannelState,
+  removeChannelState,
   currentChannelId,
+  addMessageState,
   modalState,
   modalUIState,
   form: formReducer,
