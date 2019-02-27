@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
@@ -5,7 +6,16 @@ import Alert from 'react-bootstrap/Alert';
 import * as actions from '../actions';
 import { withSocket } from '../context';
 
-const mapStateToProps = ({ messages, currentChannelId }) => ({ ...messages, currentChannelId });
+const mapStateToProps = ({ messages, currentChannelId }) => {
+  const { byId, allIds } = messages;
+  const filteredAllIds = allIds.filter(id => byId[id].channelId === currentChannelId);
+  const filteredById = _.pick(byId, filteredAllIds);
+  return {
+    byId: filteredById,
+    allIds: filteredAllIds,
+    currentChannelId,
+  };
+};
 
 @connect(mapStateToProps)
 @withSocket
@@ -19,10 +29,9 @@ class Messages extends React.Component {
   }
 
   render() {
-    const { byId, allIds, currentChannelId } = this.props;
+    const { byId, allIds } = this.props;
     return (
       allIds
-        .filter(id => byId[id].channelId === currentChannelId)
         .map((id) => {
           const { user, text } = byId[id];
           return (
