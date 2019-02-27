@@ -31,4 +31,3 @@ export const addMessageSocket = createAction('MESSAGE_FETCH_SUCCESS_SOCKET');
 
 export const setModal = createAction('MODAL_SET');
 export const toggleModalUIState = createAction('MODAL_UI_STATE_TOGGLE');
-export const setChannelForRemoval = createAction('CHANNEL_FOR_REMOVAL_SET');
