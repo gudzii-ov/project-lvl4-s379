@@ -5,21 +5,14 @@ import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
 const channels = handleActions({
-  [actions.addChannel](state, { payload: { data: { attributes: channel } } }) {
+  [actions.addChannelSocket](state, { payload: { data: { attributes: channel } } }) {
     const { byId, allIds } = state;
     return {
       byId: { ...byId, [channel.id]: channel },
       allIds: [...allIds, channel.id],
     };
   },
-  [actions.removeChannel](state, { payload: { data: { id } } }) {
-    const { byId, allIds } = state;
-    return {
-      byId: _.omitBy(byId, channel => channel.id === id),
-      allIds: allIds.filter(cId => cId !== id),
-    };
-  },
-  [actions.renameChannel](state, { payload: { data: { id, attributes: { name } } } }) {
+  [actions.renameChannelSocket](state, { payload: { data: { id, attributes: { name } } } }) {
     const { byId, allIds } = state;
     const channel = byId[id];
     const newChannel = { ...channel, name };
@@ -28,17 +21,24 @@ const channels = handleActions({
       allIds,
     };
   },
+  [actions.removeChannelSocket](state, { payload: { data: { id } } }) {
+    const { byId, allIds } = state;
+    return {
+      byId: _.omitBy(byId, channel => channel.id === id),
+      allIds: allIds.filter(cId => cId !== id),
+    };
+  },
 }, { byId: {}, allIds: [] });
 
 const messages = handleActions({
-  [actions.addMessage](state, { payload: { data: { attributes: message } } }) {
+  [actions.addMessageSocket](state, { payload: { data: { attributes: message } } }) {
     const { byId, allIds } = state;
     return {
       byId: { ...byId, [message.id]: message },
       allIds: [message.id, ...allIds],
     };
   },
-  [actions.removeMessages](state, { payload: { data: { id } } }) {
+  [actions.removeChannelSocket](state, { payload: { data: { id } } }) {
     const { byId } = state;
     const newById = _.omitBy(byId, message => message.channelId === id);
     const newAllIds = _.reverse(_.keys(newById)).map(key => Number(key));
@@ -53,7 +53,7 @@ const currentChannelId = handleActions({
   [actions.changeChannel](state, { payload: id }) {
     return id;
   },
-  [actions.removeChannel](state, { payload: { data: { id } } }) {
+  [actions.removeChannelSocket](state, { payload: { data: { id } } }) {
     return state === id ? 1 : state;
   },
 }, '');

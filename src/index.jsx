@@ -75,17 +75,16 @@ const store = createStore(
 
 const socket = io.connect('/');
 socket.on('newChannel', (response) => {
-  store.dispatch(actions.addChannel(response));
+  store.dispatch(actions.addChannelSocket(response));
 });
 socket.on('removeChannel', (response) => {
-  store.dispatch(actions.removeChannel(response));
-  store.dispatch(actions.removeMessages(response));
+  store.dispatch(actions.removeChannelSocket(response));
 });
 socket.on('renameChannel', (response) => {
-  store.dispatch(actions.renameChannel(response));
+  store.dispatch(actions.renameChannelSocket(response));
 });
 socket.on('newMessage', (response) => {
-  store.dispatch(actions.addMessage(response));
+  store.dispatch(actions.addMessageSocket(response));
 });
 
 const element = (
