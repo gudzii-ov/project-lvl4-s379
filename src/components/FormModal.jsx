@@ -1,20 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
-import * as actions from '../actions';
+import connect from '../connect';
 
 const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...modalUIState });
 
-const actionCreators = {
-  toggleModal: actions.toggleModal,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 @reduxForm({ form: 'modalForm' })
 class CommonModal extends React.Component {
   handleClose = () => {

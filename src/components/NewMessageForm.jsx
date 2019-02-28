@@ -1,21 +1,16 @@
 import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import * as actions from '../actions';
+import connect from '../connect';
 import { withUser } from '../context';
 
 const mapStateToProps = state => ({ channelId: state.currentChannelId });
 
-const actionCreators = {
-  addMessage: actions.addMessage,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 @reduxForm({ form: 'newMessage' })
 @withUser
 class NewMessageForm extends React.Component {

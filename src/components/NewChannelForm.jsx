@@ -1,20 +1,15 @@
 import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import * as actions from '../actions';
+import connect from '../connect';
 
 const mapStateToProps = () => ({});
 
-const actionCreators = {
-  addChannel: actions.addChannel,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 @reduxForm({ form: 'newChannel' })
 class NewChannelForm extends React.Component {
   handleSubmit = async (values) => {

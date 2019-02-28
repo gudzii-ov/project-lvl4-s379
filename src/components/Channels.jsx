@@ -1,24 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
-import * as actions from '../actions';
+import connect from '../connect';
 import NewChannelForm from './NewChannelForm';
 import CommonModal from './CommonModal';
 import FormModal from './FormModal';
 
 const mapStateToProps = ({ channels, currentChannelId }) => ({ ...channels, currentChannelId });
 
-const actionCreators = {
-  changeChannel: actions.changeChannel,
-  removeChannel: actions.removeChannel,
-  renameChannel: actions.renameChannel,
-  toggleModal: actions.toggleModal,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class Channels extends React.Component {
   handleClickChannel = id => () => {
     const { changeChannel } = this.props;

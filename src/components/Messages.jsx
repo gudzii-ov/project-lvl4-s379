@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
-import { connect } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
+
+import connect from '../connect';
 
 const mapStateToProps = ({ messages, currentChannelId }) => {
   const { byId, allIds } = messages;

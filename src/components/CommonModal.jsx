@@ -1,17 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-import * as actions from '../actions';
+import connect from '../connect';
 
 const mapStateToProps = ({ modalState, modalUIState }) => ({ ...modalState, ...modalUIState });
 
-const actionCreators = {
-  toggleModal: actions.toggleModal,
-};
-
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class CommonModal extends React.Component {
   handleClose = () => {
     const { toggleModal } = this.props;
