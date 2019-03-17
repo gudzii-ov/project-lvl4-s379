@@ -1,6 +1,6 @@
 {
   "name": "frontend_l4_chat_project_gudzii_ov",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Hexlet chat project",
   "main": "dist/index.js",
   "bin": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:gudzii-ov/project-lvl4-s379.git"
+    "url": "git+https://github.com/gudzii-ov/front-4-chat"
   },
   "author": "Kirill Mokevnin",
   "contributors": [
@@ -26,7 +26,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/gudzii-ov/front-4-chat/issues"
   },
   "homepage": "",
   "dependencies": {
